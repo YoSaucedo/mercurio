@@ -2,6 +2,8 @@
 
 instalación
 
+  En el archivo zip está la versión 0.9.33 con fecha 10 de enero de 2019. No es una versión final.
+
   1.Usa el archivo db.sql para importar la estructura de la base de datos. Después borralo.
   
   2.Abre el archivo config.php e introduce la dirección de instalación de Mercurio y las credenciales de tu base de datos.
