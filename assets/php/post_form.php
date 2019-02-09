@@ -1,5 +1,5 @@
-<script src="<?php echo url(); ?>/inc/ckeditor/ckeditor.js"></script>
-<script src="<?php echo url(); ?>/inc/js/jquery.autoSave.min.js"></script>
+<script src="<?php echo url(); ?>/assets/ckeditor/ckeditor.js"></script>
+<script src="<?php echo url(); ?>/assets/js/jquery.autoSave.min.js"></script>
 <title>Escribir nueva historia</title>
 <form class="write" method="POST" action="" enctype="multipart/form-data">
 	<input class="post_title" id="title" type="text" name="title" placeholder="Título">
@@ -73,12 +73,12 @@ $(document).ready(function(){
 		var draft_id = $('#draft_id').val();
 		if(post_title != '' && post_text != '')  {  
 			$.ajax({  
-				url:"../inc/php/autosave.php",  
+				url:"../assets/php/autosave.php",  
 				method:"POST",  
 				data:{title:post_title, text_body:post_text, section:post_section, draft_id:draft_id},  
 				dataType:"text",  
 				success:function(data)  {  
-					$('#autoSave').html("<img src='../inc/img/saved_draft.png'>");  
+					$('#autoSave').html("<img src='../assets/img/saved_draft.png'>");  
 					setTimeout(function(){  
 						$('#autoSave').html('');  
 					}, 1000);  

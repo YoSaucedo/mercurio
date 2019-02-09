@@ -1,6 +1,6 @@
 <title>Feed</title>
 <section class="content">
-<?php 
+<?php
 	$username = $_SESSION['username'];
 	if (isset($_GET['pageno'])) {
 		$pageno = $_GET['pageno'];
@@ -26,9 +26,9 @@
 	}
 
 	if ($total_rows == 0) { ?>
-		
+
 		<h1>Tu feed está vacío.</h1>
-		<img class="mainimg" src="../inc/img/feed_empty.png">
+		<img class="mainimg" src="../assets/img/feed_empty.png">
 		<p>Este es tu feed, aquí se mostrarán las últimas publicaciones de los usuarios que más te gusten, para añadir a un usuario a tu feed, haz click en el icono <i class="im im-frown-o"></i> en su perfil ¡y se convertirá en  una carita sonriente <i class="im im-smiley-o"></i>!</p>
 		<p>Tu feed es privado, sólo tú puedes verlo y saber a quién sigues y a quién no. Así no le romperás a nadie el corazón.</p>
 		<p>¿Por qué no <a href="../search.php">añades usuarios a tu feed</a>?</p>
@@ -42,18 +42,18 @@
 					</a>
 					<a class="with username" href="<?php echo $author['username']; ?>">@<?php echo mroExcerpt($author['username'], 7) ?></a>
 				</div>
-			<?php } 
+			<?php }
 			if (!isset($_GET['all']) && $allauthors->rowCount() > 7) { ?>
 				<div class="with more">
-					<a href="<?php echo url()."/u/?feed&all"; ?>">
-						<img class="with" src="<?php echo url(); ?>/u/imgs/default_user.png">
+					<a href="<?php echo url()."/user/?feed&all"; ?>">
+						<img class="with" src="<?php echo url(); ?>/user/imgs/default_user.png">
 					</a>
 					<a href="?feed&all" class="with username">Ver todo</a>
 				</div>
 			<?php } ?>
  		</div>
 		<div class="posts">
-			<?php while ($post = $query->fetch()) { include '../inc/php/single_post.php'; } ?>
+			<?php while ($post = $query->fetch()) { include '../assets/php/single_post.php'; } ?>
 		</div>
 		<div class="page-load-status">
 			<p class="infinite-scroll-request"><i class="im im-spinner" title="Cargando"></i></p>
@@ -68,15 +68,15 @@
 		    		<li <?php if (isset($_GET['pageno']) && $pageno+1 == $_GET['pageno']) { echo "class='current'"; } ?>>
 		    			<a class="<?php if($_GET['pageno'] == $pageno+1){ echo "current"; } if ($pageno+1 !== 1 && $_GET['pageno'] < $pageno+1) { echo "pagination__next"; } ?>" href="?feed&pageno=<?php echo $pageno+1; ?>"><?php echo $pageno+1 ?></a>
 		    		</li>
-		    	<?php $pageno++; 
+		    	<?php $pageno++;
 		    }
 		} ?>
 		</ul>
 	<?php }
 ?>
 </section>
-<script src="../inc/js/masonry.pkgd.min.js"></script>
-<script src="../inc/js/infinite-scroll.pkgd.min.js"></script>
+<script src="../assets/js/masonry.pkgd.min.js"></script>
+<script src="../assets/js/infinite-scroll.pkgd.min.js"></script>
 <script type="text/javascript">
 	var $grid = $('.posts').masonry({
 		itemSelector: '.single_post',

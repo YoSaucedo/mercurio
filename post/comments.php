@@ -1,13 +1,13 @@
 <section class="comments">
 <h3>Comentarios.</h3>
-<?php if (uUser()) { 
+<?php if (uUser()) {
 	if (uBlocked()) {
 		echo uBlocked();
 	} else { ?>
 		<div class="parent">
 		<form class="child comment" action="" method="post">
-			<?php //avatar e información del autor 
-				$author = $conn->prepare("SELECT username FROM users WHERE id = ?"); 
+			<?php //avatar e información del autor
+				$author = $conn->prepare("SELECT username FROM users WHERE id = ?");
 				$author->execute([$post['author']]);
 			?>
 			<input type="hidden" name="post_author" value="<?php echo $author->fetch()['username']; ?>">
@@ -41,8 +41,8 @@
 	<h3>Debes estar registrado para poder comentar.</h3>
 	</section>
 	<section class="login">
-		<?php include '../u/register.php';
-		include '../u/login.php'; ?>
+		<?php include '../user/register.php';
+		include '../user/login.php'; ?>
 	</section>
 	<section class="comments">
 <?php } ?>
@@ -56,11 +56,11 @@
 		$author = $comment['author'];
 		$getavatar = $conn->query("SELECT * FROM users WHERE id = '$author'");
 		while ($user = $getavatar->fetch()) { ?>
-			<a class="avatar" href="../u/?u=<?php echo $user['username']; ?>">
-				<img src="../u/<?php echo $user['avatar']; ?>">
+			<a class="avatar" href="../user/?u=<?php echo $user['username']; ?>">
+				<img src="../user/<?php echo $user['avatar']; ?>">
 			</a>
 	<div>
-		<a class="author" href="../u/?u=<?php echo $user['username']; ?>">@<?php echo $user['username']; ?></a>
+		<a class="author" href="../user/?u=<?php echo $user['username']; ?>">@<?php echo $user['username']; ?></a>
 		<?php } ?>
 		<time datetime="<?php echo date('d/m/Y', (int)$comment['stamp']); ?>"><?php echo date('d/m/Y', (int)$comment['stamp']); ?></time>
 		<?php if (uUser()) { ?>

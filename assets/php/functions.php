@@ -6,7 +6,7 @@
 			/* Software by Facundo Subiabre
 			 * https://github.com/facuonline/mercurio
 			 * 2018 / 2019
-			 * 
+			 *
 			 */
 			echo "0.9.33";
 		}
@@ -25,7 +25,7 @@
 			global $conn;
 			$query = $conn->query("SELECT logo FROM install");
 			if (empty($query->fetch()['logo'])) {
-				echo "/inc/img/mercurio.png";
+				echo "/assets/img/mercurio.png";
 			} else {
 				$query = $conn->query("SELECT logo FROM install");
 				echo $query->fetch()['logo'];
@@ -147,7 +147,7 @@
 		}
 		function cover($file) {
 			list($width, $height) = getimagesize($file);
-			if ($width > $height) {	
+			if ($width > $height) {
 				$ratio = $width / $height;
 			} elseif ($width == $height) {
 				$ratio = $width / $height;
@@ -167,9 +167,9 @@
 			}
 			return $pageURL;
 		}
-		function read_word($input_file){	
-			$strip_texts = ''; 
-			$texts = ''; 	
+		function read_word($input_file){
+			$strip_texts = '';
+			$texts = '';
 			if(!$input_file || !file_exists($input_file)) return false;
 			$zip = zip_open($input_file);
 
@@ -234,7 +234,7 @@
 		if ($query->fetch()['access'] != '1') {
 			return "<section class='content'>
 				<h2>Has sido bloqueado por un administrador.</h2>
-				<img class='mainimg' src='".url()."/inc/img/phone_lock.png'>
+				<img class='mainimg' src='".url()."/assets/img/phone_lock.png'>
 				<p>No puedes publicar nuevas entradas ni comentarios ni editar las entradas que hayas publicado. Por favor, tómate un tiempo para descansar.</p>
 				<p>Si crees que ya estás listo para volver a participar, puedes contactar con un <a href='".url()."/search.php?for=:admins'>administrador</a> para que te desbloquee. Deberás demostrar que tu bloqueo debe ser levantado.</p>
 				</section>";
@@ -371,10 +371,10 @@
 			$since = time();
 			$sql = $conn->prepare("INSERT INTO users (username, name, email, password, since, access) VALUES (?, ?, ?, ?, ?, ?)");
 			$sql->execute([
-					$username, 
-					$username, 
-					$email, 
-					$password, 
+					$username,
+					$username,
+					$email,
+					$password,
 					$since,
 					'1'
 				]);
@@ -385,7 +385,7 @@
 				$_SESSION['user_id'] = $user['id'];
 				$_SESSION['since'] = $user['since'];
 			}
-			header('location: '.url().'/u/?welcome');
+			header('location: '.url().'/user/?welcome');
 			//el primer usuario es admin por defecto
 			$sql = $conn->query("SELECT COUNT(*) FROM users");
 			if ($sql->fetchColumn() == 1) {
@@ -421,9 +421,9 @@
 			if (empty($errors)) {
 				$sql = $conn->prepare("UPDATE users SET name = ?, bio = ?, avatar = ? WHERE id = ?");
 				$sql->execute([
-						$name, 
-						$bio, 
-						$avatar, 
+						$name,
+						$bio,
+						$avatar,
 						$_SESSION['user_id']
 					]);
 				if ((time()-$_SESSION['since']) < 86400) {
@@ -453,7 +453,7 @@
 			if (empty($errors)) {
 				$sql = $conn->prepare("UPDATE users SET email = ? WHERE username = ?");
 				$sql->execute([
-						$email, 
+						$email,
 						$_SESSION['username']
 					]);
 				$successes[] = "Se ha actualizado tu correo.";
@@ -474,7 +474,7 @@
 			if (empty($errors)) {
 				$sql = $conn->prepare("UPDATE users SET password = ? WHERE username = ?");
 				$sql->execute([
-						$email, 
+						$email,
 						$_SESSION['username']
 					]);
 				$successes[] = "Se ha actualizado tu contraseña.";
@@ -514,7 +514,7 @@
 					$site = url();
 					$token = md5($username).uniqid();
 					$sql = $conn->query("UPDATE users SET access = '0', token = '$token' WHERE username = '$username'");
-					$message = "Hola, $username.\n Has recibido este mensaje porque se ha solicitado reestablecer tu contraseña en $site\n Debido a esto tu cuenta se ha bloqueado como medida preventiva. Si no has sido tú quien ha solicitado este correo, tu cuenta puede estar comprometida.\n Usa el siguiente enlace para recuperar tu cuenta y reestablecer tu contraseña.\n $site/u/index.php?password&passwordtoken=$token";
+					$message = "Hola, $username.\n Has recibido este mensaje porque se ha solicitado reestablecer tu contraseña en $site\n Debido a esto tu cuenta se ha bloqueado como medida preventiva. Si no has sido tú quien ha solicitado este correo, tu cuenta puede estar comprometida.\n Usa el siguiente enlace para recuperar tu cuenta y reestablecer tu contraseña.\n $site/user/index.php?password&passwordtoken=$token";
 					$cabeceras = 'From: '.mroWebmail()."\r\n".
 	    			'X-Mailer: PHP/'.phpversion();
 					if (mail($email, 'Reestablecer contraseña', $message)) {
@@ -564,9 +564,9 @@
 				//insertar en la base de datos
 					$sql = $conn->prepare("INSERT INTO messages (sender, receiver, body, stamp) VALUES (?, ?, ?, ?)");
 					$sql->execute([
-							$_SESSION['username'], 
-							$receiver, 
-							$message, 
+							$_SESSION['username'],
+							$receiver,
+							$message,
 							$stamp
 						]);
 					$successes[] = "Tu mensaje ha sido enviado.";
@@ -574,7 +574,7 @@
 					$sender = $_SESSION['username'];
 					$queryID = $conn->prepare("SELECT * FROM messages WHERE sender = ? ORDER BY id DESC LIMIT 1");
 					$queryID->execute([$_SESSION['username']]);
-					$target = url()."/u/m/?with=".$_SESSION['username']."#message".$queryID->fetch()['id'];
+					$target = url()."/user/message/?with=".$_SESSION['username']."#message".$queryID->fetch()['id'];
 					$notificate = $conn->query("INSERT INTO notifications (user, target, content) VALUES ('$receiver', '$target', 'Tienes un nuevo mensaje de @$sender.')");
 			}
 		}
@@ -584,7 +584,7 @@
 			if (!empty($_POST['comment_body'])) {
 				$comment_body = $_POST['comment_body'];
 				$pattern = array('/#([0-9]+)/', '/@(\w+)/');
-				$replace = array('<a class="hash" href="#comment$1">#$1</a>', '<a class="arroba" href="../u/?u=$1">@$1</a>');
+				$replace = array('<a class="hash" href="#comment$1">#$1</a>', '<a class="arroba" href="../user/?u=$1">@$1</a>');
 				$body = preg_replace($pattern, $replace, $comment_body);
 			} else {
 				$errors[] = "No puedes publicar un comentario vacío.";
@@ -593,10 +593,10 @@
 			$post = $_POST['post_id'];
 			$sql = $conn->prepare("INSERT INTO comments (author, name, body, stamp, post) VALUES (?, ?, ?, ?, ?)");
 			if ($sql->execute([
-					$_SESSION['user_id'], 
+					$_SESSION['user_id'],
 					$_SESSION['username'],
-					$body, 
-					$stamp, 
+					$body,
+					$stamp,
 					$post
 				])) {
 				$successes[] = "Tu comentario se ha publicado.";
@@ -610,7 +610,7 @@
 					$slug = $getslug->fetch()['slug'];
 					$getcomment = $conn->prepare("SELECT * FROM comments WHERE post = ? AND author = ? ORDER BY id DESC LIMIT 1");
 					$getcomment->execute([
-						$post, 
+						$post,
 						$_SESSION['user_id']
 					]);
 					$commentid = $getcomment->fetch()['id'];
@@ -728,7 +728,7 @@
 				$errors[] = "No puedes publicar sin título.";
 			}
 			if (!empty($_POST['text_body'])) {
-				require_once '../inc/purifier/library/HTMLPurifier.auto.php';
+				require_once '../assets/purifier/library/HTMLPurifier.auto.php';
     			$purifier = new HTMLPurifier();
 				$body = $purifier->purify($_POST['text_body']);
 			} else {
@@ -776,7 +776,7 @@
 				$draft->execute([$_POST['draft_id']]);
 				$successes[] = "Tu historia se ha publicado con éxito.";
 				//redirigir
-				header('location:'.url()."/post/?read=".$slug);		
+				header('location:'.url()."/post/?read=".$slug);
 			}
 		}
 		//importar
@@ -784,7 +784,7 @@
 			if (!empty($_FILES['import']['name'])) {
 				$filename = $_FILES['import']['tmp_name'];
 				$read = read_word($filename);
-				require_once '../inc/purifier/library/HTMLPurifier.auto.php';
+				require_once '../assets/purifier/library/HTMLPurifier.auto.php';
     			$purifier = new HTMLPurifier();
 				$body = $purifier->purify($read);
 			} else {
@@ -824,10 +824,10 @@
 				$sql->execute([
 					$title,
 						$body,
-						$_SESSION['user_id'], 
+						$_SESSION['user_id'],
 						$slug,
-						time(), 
-						$section, 
+						time(),
+						$section,
 						$cover,
 						time(),
 						"posted"
@@ -844,7 +844,7 @@
 				$errors[] = "No puedes publicar sin título.";
 			}
 			if (!empty($_POST['text_body'])) {
-				require_once '../inc/purifier/library/HTMLPurifier.auto.php';
+				require_once '../assets/purifier/library/HTMLPurifier.auto.php';
     			$purifier = new HTMLPurifier();
 				$body = $purifier->purify($_POST['text_body']);
 			} else {
@@ -902,7 +902,7 @@
 				//redirigir
 				$slug = $conn->prepare("SELECT slug FROM posts WHERE id = ?");
 				$slug->execute([$_GET['edit']]);
-				header('location:'.url()."/post/?read=".$slug->fetch()['slug']);		
+				header('location:'.url()."/post/?read=".$slug->fetch()['slug']);
 			}
 		}
 		//eliminar historia
@@ -928,7 +928,7 @@
 				$title = date('l d F Y');
 			}
 			if (!empty($_POST['text_body'])) {
-				require_once '../inc/purifier/library/HTMLPurifier.auto.php';
+				require_once '../assets/purifier/library/HTMLPurifier.auto.php';
     			$purifier = new HTMLPurifier();
 				$body = $purifier->purify($_POST['text_body']);
 			} else {
@@ -970,10 +970,10 @@
 				$sql = $conn->prepare("INSERT INTO drafts (id, title, body, author, stamp, section, class, post) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 				$sql->execute([
 					$_POST['draft_id'],
-					$_POST['title'], 
-					$body, 
-					$_SESSION['user_id'], 
-					time(), 
+					$_POST['title'],
+					$body,
+					$_SESSION['user_id'],
+					time(),
 					$section,
 					$class,
 					$post
@@ -1008,7 +1008,7 @@
 				$errors[] = "No puedes publicar sin título.";
 			}
 			if (!empty($_POST['text_body'])) {
-				require_once '../inc/purifier/library/HTMLPurifier.auto.php';
+				require_once '../assets/purifier/library/HTMLPurifier.auto.php';
     			$purifier = new HTMLPurifier();
 				$body = $purifier->purify($_POST['text_body']);
 			}
@@ -1052,7 +1052,7 @@
 				$errors[] = "No puedes publicar sin título.";
 			}
 			if (!empty($_POST['text_body'])) {
-				require_once '../inc/purifier/library/HTMLPurifier.auto.php';
+				require_once '../assets/purifier/library/HTMLPurifier.auto.php';
     			$purifier = new HTMLPurifier();
 				$body = $purifier->purify($_POST['text_body']);
 			} else {
@@ -1117,13 +1117,13 @@
 			if (empty($errors)) {
 				$sql = $conn->prepare("UPDATE install SET name = ?, logo = ?, headerbg = ?, action = ?, webmail = ?, rules = ?, maxfilesize = ? WHERE fingerprint = ?");
 				$sql->execute([
-						$name, 
-						$logo, 
+						$name,
+						$logo,
 						$headerbg,
 						$action,
 						$webmail,
 						$rules,
-						$maxfilesize, 
+						$maxfilesize,
 						mroFingerPrint()
 					]);
 				$successes[] = "La configuración se ha guardado.";
@@ -1154,14 +1154,14 @@
 					$slug = $_POST['slug'];
 				}
 			} else {
-				$slug = trim(strtolower(preg_replace('/[^0-9A-Za-z-]/', '', $_POST['slug'])));	
+				$slug = trim(strtolower(preg_replace('/[^0-9A-Za-z-]/', '', $_POST['slug'])));
 			}
 			if (empty($errors)) {
 				$sql = $conn->prepare("INSERT INTO sections (name, adminonly, color, description, slug) VALUES (?, ?, ?, ?, ?)");
 				$sql->execute([
-					$name, 
-					$adminonly, 
-					$color, 
+					$name,
+					$adminonly,
+					$color,
 					$_POST['description'],
 					$slug
 				]);
@@ -1192,14 +1192,14 @@
 					$slug = $_POST['slug'];
 				}
 			} else {
-				$slug = $_POST['slug'];	
+				$slug = $_POST['slug'];
 			}
 			if (empty($errors)) {
 				$sql = $conn->prepare("UPDATE sections SET name = ?, adminonly = ?, color = ?, description = ?, slug = ? WHERE id = ?");
 				$sql->execute([
-					$name, 
-					$adminonly, 
-					$color, 
+					$name,
+					$adminonly,
+					$color,
 					$_POST['description'],
 					$slug,
 					$_POST['section_id']
@@ -1257,7 +1257,7 @@
 		if (isset($_POST['block_user'])) {
 			$sql = $conn->prepare("UPDATE users SET access = ? WHERE username = ?");
 			$sql->execute([
-				time(), 
+				time(),
 				$_GET['user']
 			]);
 			$successes[] = "El usuario ha sido bloqueado.";
@@ -1292,7 +1292,7 @@
 					$front = $_FILES['front']['name'];
 					$file = $_FILES['front']['tmp_name'];
 					$exploded = explode('.', $front);
-				    $ext = $exploded[count($exploded) - 1]; 
+				    $ext = $exploded[count($exploded) - 1];
 				    if (preg_match('/jpg|jpeg/i', $ext)) {
 				        $tmp=imagecreatefromjpeg($file);
 				    } elseif (preg_match('/png/i', $ext)) {
@@ -1304,7 +1304,7 @@
 				    } else {
 				        $errors[] = "No se pudo procesar la imagen seleccionada.";
 				    }
-				    imagejpeg($tmp, '../inc/img/front.jpg', 85);
+				    imagejpeg($tmp, '../assets/img/front.jpg', 85);
 				    imagedestroy($tmp);
 				    $successes[] = "La imagen de portada ha sido actualizada.";
 				} else {
@@ -1327,7 +1327,7 @@
 			$sql = $conn->query("UPDATE sections SET front = '0' WHERE id = '$id'");
 			$successes[] = "La sección ha vuelto a posicionar orgánicamente.";
 		}
-		
+
 		//enviar post
 		if (isset($_POST['post_front'])) {
 			$id = $_GET['post'];

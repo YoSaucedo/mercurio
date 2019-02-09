@@ -30,7 +30,7 @@
 <?php } else { ?>
 	<p><a href="?front&how">Cómo funciona</a>.</p>
 	<form class="front" method="POST" action="" enctype="multipart/form-data">
-		<div class="user_banner" style="background-image: url('../inc/img/front.jpg');">
+		<div class="user_banner" style="background-image: url('../assets/img/front.jpg');">
 	        <input class="file" id="file" type="file" name="front" accept=".jpg, .png, .gif, .webp">
 	        <label class="button avatar" for="file"><i class="im im-upload"></i></label>
 	        <span class="username">Subir imagen de portada.</span>

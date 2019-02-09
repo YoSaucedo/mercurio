@@ -38,8 +38,8 @@
 		$countposts = $conn->query("SELECT id FROM posts WHERE section = '$section[id]'");
 		$posts[] = $countposts->rowCount();
 	}?>
-	<script src="../inc/js/Chart.js"></script>
-	<script src="../inc/js/masonry.pkgd.min.js"></script>
+	<script src="../assets/js/Chart.js"></script>
+	<script src="../assets/js/masonry.pkgd.min.js"></script>
 	<script type="text/javascript">
 		$('.sections').masonry({
 			// options

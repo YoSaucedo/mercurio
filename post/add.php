@@ -3,7 +3,7 @@
 	$query->execute([$_GET['add']]);
 
 	if ($query->rowCount() != 0 && $_SESSION['user_id'] == $query->fetch()['author']) {
-		include '../inc/php/add_form.php';
+		include '../assets/php/add_form.php';
 	} else {
 		header('location:'.url()."/post/");
 	}

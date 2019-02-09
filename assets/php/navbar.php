@@ -6,10 +6,10 @@
 		</a>
 		<nav>
 			<ul class="menu">
-				<?php 
+				<?php
 				if (uUser()) { ?>
-					<a href="<?php echo url(); ?>/u/?feed"><li><i class="im im-smiley-o"></i><span>Feed</span></li></a>
-					<a href="<?php echo url(); ?>/u"><li><i class="im im-user-circle"></i>
+					<a href="<?php echo url(); ?>/user/?feed"><li><i class="im im-smiley-o"></i><span>Feed</span></li></a>
+					<a href="<?php echo url(); ?>/user"><li><i class="im im-user-circle"></i>
 						<span>@<?php echo $_SESSION['username']; ?></span>
 					</li></a>
 					<a href="<?php echo url(); ?>/post"><li><i class="im im-pencil"></i><span>Escribir</span></li></a>

@@ -1,6 +1,6 @@
 <?php 
 	require_once '../config.php';
-	include '../inc/php/header.php';
+	include '../assets/php/header.php';
 	if (isset($_GET['password'])) {
 		include 'password.php';
 	} elseif (isset($_GET['u'])) {
@@ -21,5 +21,5 @@
 			include 'register.php'; ?>
 		</section>
 	<?php }
-	include '../inc/php/footer.php';
+	include '../assets/php/footer.php';
 ?>

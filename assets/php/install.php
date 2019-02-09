@@ -32,7 +32,7 @@
 <head>
 	<title>Mercurio</title>
 	<meta charset="utf-8" type="text/content">
-	<link rel="stylesheet" type="text/css" href="<?php echo url(); ?>/inc/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo url(); ?>/assets/css/styles.css">
 </head>
 <form method="POST" action="">
 	<h1>Bienvenido a Mercurio.</h1>

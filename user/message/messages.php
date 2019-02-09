@@ -14,17 +14,17 @@
 		$avatar = $conn->prepare("SELECT avatar FROM users WHERE username = ?");
 		$avatar->execute([$m['sender']]); ?>
 		<div title="<?php echo $m['stamp']; ?>" class="message <?php if($m['sender'] == $user) { echo "out"; } else { echo "in"; } ?>" id="message<?php echo $m['id']; ?>">
-			<a class="author" href="<?php echo url()."/u/?u=".$m['sender']; ?>">
+			<a class="author" href="<?php echo url()."/user/?u=".$m['sender']; ?>">
 				<img src="../<?php echo $avatar->fetch()['avatar']; ?>">
 			</a>
 			<p><?php echo nl2br(mroDecryption($m['body'])); ?></p>
 		</div>
-	<?php 
+	<?php
 		if ($_SESSION['username'] != $m['sender']) {
 			$read = $conn->prepare("UPDATE messages SET unread = '0' WHERE id = ?");
 			$read->execute([$m['id']]);
 			$notificate = $conn->prepare("DELETE FROM notifications WHERE user = ? AND target = ?");
-			$notificate->execute([$_SESSION['username'], url()."/u/m/?with=".$m['sender']."#message".$m['id']]);
+			$notificate->execute([$_SESSION['username'], url()."/user/message/?with=".$m['sender']."#message".$m['id']]);
 		}
 	}
 ?>

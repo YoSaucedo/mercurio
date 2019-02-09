@@ -7,14 +7,14 @@ $postauthor = $sql->fetch()['username']; ?>
 	<?php } ?>
 	<div class="post_card">
 		<h2><?php echo $post['title']; ?></h2>
-		<a class="post_author" href="<?php echo url()."/u/?u=".$postauthor ?>">@<?php echo $postauthor; ?></a>
+		<a class="post_author" href="<?php echo url()."/user/?u=".$postauthor ?>">@<?php echo $postauthor; ?></a>
 		<p><?php if (preg_match('/&lt;iframe/', $post['body'])) { echo "Esta historia contiene un texto incrustado.";
 		} else { echo mroExcerpt($post['body'], 333); } ?></p>
 	</div>
 	</a>
-	<?php 
+	<?php
 		//nuevo capítulo
-		if (!empty($post['updated']) && (time() - $post['updated']) < 86400 /*segundos por día*/ ) { 
+		if (!empty($post['updated']) && (time() - $post['updated']) < 86400 /*segundos por día*/ ) {
 			if ($post['updated_m'] == "posted") { ?>
 				<p class="post_chapters"><a href="<?php echo url()."/post/?read=".$post['slug']; ?>"><i class="im im-idea"></i> Nueva historia.</a></p>
 			<?php } if ($post['updated_m'] == "subpost") { ?>

@@ -18,7 +18,7 @@
 		$query = $conn->prepare("SELECT * FROM posts WHERE id IN (SELECT post FROM stars WHERE star_from = ?) ORDER BY id DESC LIMIT $offset, $limit");
 		$query->execute([$_SESSION['username']]); ?>
 		<div class="posts">
-			<?php while ($post = $query->fetch()) { include '../inc/php/single_post.php'; } ?>		
+			<?php while ($post = $query->fetch()) { include '../assets/php/single_post.php'; } ?>		
 		</div>
 		<div class="page-load-status">
 			<p class="infinite-scroll-request"><i class="im im-spinner" title="Cargando"></i></p>
@@ -38,8 +38,8 @@
 		} ?>
 		</ul>
 	</section>
-	<script src="../inc/js/masonry.pkgd.min.js"></script>
-	<script src="../inc/js/infinite-scroll.pkgd.min.js"></script>
+	<script src="../assets/js/masonry.pkgd.min.js"></script>
+	<script src="../assets/js/infinite-scroll.pkgd.min.js"></script>
 	<script type="text/javascript">
 		var $grid = $('.posts').masonry({
 			itemSelector: '.single_post',
@@ -56,7 +56,7 @@
 <?php } else { $query = $conn->prepare("SELECT * FROM posts WHERE id IN (SELECT post FROM stars WHERE star_from = ?) ORDER BY id DESC LIMIT 3");
 	$query->execute([$_SESSION['username']]); ?>
 	<div class="posts">
-		<?php while ($post = $query->fetch()) { include '../inc/php/single_post_simple.php'; } ?>		
+		<?php while ($post = $query->fetch()) { include '../assets/php/single_post_simple.php'; } ?>		
 	</div>
 <?php 
 	if ($query->rowCount() != 0) { ?>

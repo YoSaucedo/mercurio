@@ -1,6 +1,6 @@
-<?php 
+<?php
 	require_once '../config.php';
-	include '../inc/php/header.php';
+	include '../assets/php/header.php';
 
 	if (uUser()) {
 	$query = $conn->prepare("SELECT * FROM users WHERE username = ?");
@@ -16,7 +16,7 @@
 			<p>Tu nombre público es distinto de tu nombre de usuario. Tu nombre de usuario no se puede cambiar, pero puedes cambiar tu nombre público siempre que quieras.</p>
 			<div class="user_banner">
 				<input class="file" id="file" type="file" name="avatar" accept=".jpg, .png, .gif, .webp">
-				<label class="button avatar" for="file" style="background-image: url(<?php echo url()."/u/".$result['avatar']; ?>);"><i class="im im-upload"></i></label>
+				<label class="button avatar" for="file" style="background-image: url(<?php echo url()."/user/".$result['avatar']; ?>);"><i class="im im-upload"></i></label>
 				<span class="username">Tamaño recomendado 200x200px.</span>
 				<span class="username">Peso máximo de archivo <?php mroMaxFileSize(); ?>MB.</span>
 				<span class="username">Si tu avatar no se actualiza recarga tu caché.</span>
@@ -48,5 +48,5 @@
 		header('location: ../');
 	}
 
-	include '../inc/php/footer.php';
+	include '../assets/php/footer.php';
 ?>

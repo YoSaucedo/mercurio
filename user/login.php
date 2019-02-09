@@ -4,5 +4,5 @@
 	<input type="text" name="username" placeholder="Usuario" autofocus>
 	<input type="password" name="password" placeholder="Contraseña">
 	<button type="submit" name="login">Entrar</button>
-	<?php if (mroWebmail()) { echo "<p><a class='password' href='".url()."/u/?password'>¿Has perdido tu contraseña?</a></p>"; } ?>
+	<?php if (mroWebmail()) { echo "<p><a class='password' href='".url()."/user/?password'>¿Has perdido tu contraseña?</a></p>"; } ?>
 </form>

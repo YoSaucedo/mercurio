@@ -10,7 +10,7 @@
 			<input type="text" name="name" placeholder="Nombre público" value="<?php echo $result['name']; ?>">
 			<div class="user_banner">
 				<input class="file" id="file" type="file" name="avatar" accept=".jpg, .png, .gif, .webp">
-				<label class="button avatar" for="file" style="background-image: url(<?php echo url()."/u/".$result['avatar']; ?>);"><i class="im im-upload"></i></label>
+				<label class="button avatar" for="file" style="background-image: url(<?php echo url()."/user/".$result['avatar']; ?>);"><i class="im im-upload"></i></label>
 				<span class="username">Tamaño recomendado 200x200px.</span>
 				<span class="username">Peso máximo de archivo <?php mroMaxFileSize(); ?>MB.</span>
 				<span class="username">Si tu avatar no se actualiza recarga tu caché.</span>

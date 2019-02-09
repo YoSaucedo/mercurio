@@ -10,7 +10,7 @@
 		} else {
 			$class = 'post';
 		}
-		require_once '../inc/purifier/library/HTMLPurifier.auto.php';
+		require_once '../assets/purifier/library/HTMLPurifier.auto.php';
 		$purifier = new HTMLPurifier();
 		$body = $purifier->purify($_POST['text_body']);
 

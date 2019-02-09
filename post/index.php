@@ -1,8 +1,8 @@
-<?php 
+<?php
 	require_once '../config.php';
-	include '../inc/php/header.php'; ?>
+	include '../assets/php/header.php'; ?>
 
-	<?php 
+	<?php
 	if (isset($_GET['read'])) {
 		include 'read.php';
 	} elseif (uUser() && !uBlocked()) { ?>
@@ -21,18 +21,18 @@
 			include 'write.php';
 		} ?>
 	</section>
-	<?php } elseif (uUser() && uBlocked()) { 
+	<?php } elseif (uUser() && uBlocked()) {
 		echo uBlocked();
 	} else { ?>
 		<section class="login">
 			<form>
 				<h3>Debes estar registrado para poder publicar.</h3>
-				<img src="../inc/img/open_door.png">
+				<img src="../assets/img/open_door.png">
 				<p>Es fácil, rápido y gratis. Podrás comenzar a escribir, publicar y comentar en menos de 3 minutos.</p>
 			</form>
-			<?php include '../u/register.php'; ?>
+			<?php include '../user/register.php'; ?>
 		</section>
 	<?php }
 
-	include '../inc/php/footer.php';
+	include '../assets/php/footer.php';
 ?>

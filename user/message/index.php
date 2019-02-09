@@ -1,6 +1,6 @@
 <?php 
 require_once '../../config.php';
-include '../../inc/php/header.php';
+include '../../assets/php/header.php';
 
 //usuario registrado
 if (uUser()) { ?>
@@ -16,9 +16,9 @@ if (uUser()) { ?>
 	<section class="login">
 		<form>
 			<h3>Debes estar registrado para enviar y recibir mensajes.</h3>
-			<img src="../../inc/img/phone_lock.png">
+			<img src="../../assets/img/phone_lock.png">
 			<p>A nadie le gusta recibir cartas de desconocidos.</p>
 		</form>
 		<?php include '../register.php'; ?>
 	</section>
-<?php } include '../../inc/php/footer.php'; ?>
+<?php } include '../../assets/php/footer.php'; ?>

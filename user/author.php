@@ -38,12 +38,12 @@
 	if (isset($_SESSION['username']) && $_SESSION['username'] != $author['username']) { include 'm/send.php'; } ?>
 	<div class="posts">
 	<?php while ($post = $posts->fetch()) {
-		include '../inc/php/single_post.php';
+		include '../assets/php/single_post.php';
 	} ?>
 	</div>
 </section>
-<script src="../inc/js/masonry.pkgd.min.js"></script>
-<script src="../inc/js/infinite-scroll.pkgd.min.js"></script>
+<script src="../assets/js/masonry.pkgd.min.js"></script>
+<script src="../assets/js/infinite-scroll.pkgd.min.js"></script>
 <script type="text/javascript">
 	$('.posts').masonry({
 		// options
@@ -56,7 +56,7 @@
 		<section class="login">
 			<form>
 				<h3>No tenemos a ningún usuario llamado <?php echo $_GET['u']; ?></h3>
-				<img src="../inc/img/404.png">
+				<img src="../assets/img/404.png">
 				<p>¡Pero eso es bueno! Tú o alguien que conozcas puede usar este nombre.</p>
 			</form>
 			<?php include 'register.php'; ?>

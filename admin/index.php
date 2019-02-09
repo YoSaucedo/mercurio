@@ -20,4 +20,4 @@ if (!uAdmin()) {
 		include 'admin.php';
 	} ?>
 </section>
-<?php include '../inc/php/footer.php'; ?>
+<?php include '../assets/php/footer.php'; ?>

@@ -36,14 +36,14 @@
 	<?php } else { ?>
 		<div class="posts">
 		<?php while ($post = $lastposts->fetch()) {
-			include '../inc/php/single_post_simple.php';
+			include '../assets/php/single_post_simple.php';
 		} ?>
 		</div>
 		<p><a href="?u=<?php echo $_SESSION['username']; ?>">Ver todas las historias.</a></p>
 	<?php } ?>
 </section>
-<script src="../inc/js/masonry.pkgd.min.js"></script>
-<script src="../inc/js/infinite-scroll.pkgd.min.js"></script>
+<script src="../assets/js/masonry.pkgd.min.js"></script>
+<script src="../assets/js/infinite-scroll.pkgd.min.js"></script>
 <script type="text/javascript">
 	$('.posts').masonry({
 		// options

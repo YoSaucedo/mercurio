@@ -25,20 +25,20 @@ while ($user = $sql->fetch()) { ?>
 				<h3>Promover:</h3>
 				<p>Este usuario también es un administrador, pero puedes revocarle su rol.</p>
 				<button type="submit" name="unadmin_user">Revocar administración</button>
-			<?php } else { ?> 
+			<?php } else { ?>
 				<h3>Promover:</h3>
 				<p>Puedes hacer que este usuario sea administrador. Tendrá acceso a todo el panel de administración, pero no podrá hacer cambios en otros administradores que se hayan registrado antes que él.</p>
-				<a class="button" href="<?php echo url().'/u/?u='.$user['username']; ?>">Ver perfil</a>
+				<a class="button" href="<?php echo url().'/user/?u='.$user['username']; ?>">Ver perfil</a>
 				<button type="submit" name="admin_user">Hacer administrador</button>
 			<?php }	?>
 			<h3>Bloquear:</h3>
-			<?php if ($user['access'] != '1') { 
+			<?php if ($user['access'] != '1') {
 				if ((time()-$user['access']) > 259200) { ?>
 				 	<p>Este usuario lleva bloqueado desde el <?php echo date('d/m/Y', (int)$user['access']); ?>. Quizás vaya siendo hora de desbloquearlo.</p>
 				<?php } ?>
 				<p>Este usuario está bloqueado.</p>
 				<button type="submit" name="unblock_user">Desbloquear</button>
-			<?php } else { ?> 
+			<?php } else { ?>
 				<p>Puedes bloquear a este usuario, esto le impedirá participar publicando nuevas historias y comentarios, o editando lo que ya tenía publicado.</p>
 				<button type="submit" name="block_user">Bloquear</button>
 			<?php } ?>

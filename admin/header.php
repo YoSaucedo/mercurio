@@ -4,10 +4,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
-	<link rel="stylesheet" type="text/css" href="<?php echo url(); ?>/inc/css/icons.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo url(); ?>/inc/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo url(); ?>/assets/css/icons.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo url(); ?>/assets/css/styles.css">
 	<link rel="icon" href="<?php echo url(); mroLogo(); ?>"/>
-	<script src="<?php echo url(); ?>/inc/js/jquery-3.3.1.min.js"></script>
-	<script src="<?php echo url(); ?>/inc/js/jscolor.js"></script>
-	<?php include '../inc/php/styles.php'; 
+	<script src="<?php echo url(); ?>/assets/js/jquery-3.3.1.min.js"></script>
+	<script src="<?php echo url(); ?>/assets/js/jscolor.js"></script>
+	<?php include '../assets/php/styles.php'; 
 	include 'navbar.php'; ?>

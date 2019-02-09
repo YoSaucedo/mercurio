@@ -40,7 +40,7 @@ while ($i < 8) {
 	$i++;
 }
 ?>
-<script src="../inc/js/Chart.js"></script>
+<script src="../assets/js/Chart.js"></script>
 <script type="text/javascript">
 var ctx = document.getElementById('chart').getContext('2d');
 var chart = new Chart(ctx, {

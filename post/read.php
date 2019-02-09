@@ -1,5 +1,5 @@
 <section class="content">
-<?php 
+<?php
 	$query = $conn->prepare("SELECT * FROM posts WHERE slug = ?");
 	$query->execute([$_GET['read']]);
 
@@ -9,7 +9,7 @@
 			<div class="post_title">
 				<h1><?php echo $post['title']; ?></h1>
 				<div class="post_actions">
-					<?php if (uUser() && $_SESSION['user_id'] == $post['author']) { 
+					<?php if (uUser() && $_SESSION['user_id'] == $post['author']) {
 						if (isset($_GET['and'])) { ?>
 							<a title="Editar" href="../post/?edit=<?php echo $post['id']; ?>&and=<?php echo $_GET['and']; ?>"><i class="im im-pencil"></i></a>
 						<?php } else { ?>
@@ -25,12 +25,12 @@
 				<div class="post_cover" style="background-image: url(<?php echo $post['cover']; ?>);"></div>
 			<?php } ?>
 			<div class="post_author">
-				<?php //avatar e información del autor 
-				$author = $conn->prepare("SELECT * FROM users WHERE id = ?"); 
+				<?php //avatar e información del autor
+				$author = $conn->prepare("SELECT * FROM users WHERE id = ?");
 				$author->execute([$post['author']]);
 				while ($user = $author->fetch()) { ?>
-					<a href="../u/?u=<?php echo $user['username']; ?>"><img class="post_author" src="../u/<?php echo $user['avatar']; ?>"></a>
-					<span>por <a href="../u/?u=<?php echo $user['username']; ?>"><?php echo $user['name']; ?></a></span>
+					<a href="../user/?u=<?php echo $user['username']; ?>"><img class="post_author" src="../user/<?php echo $user['avatar']; ?>"></a>
+					<span>por <a href="../user/?u=<?php echo $user['username']; ?>"><?php echo $user['name']; ?></a></span>
 				<?php }
 				//capítulos
 				$subs = $conn->prepare("SELECT * FROM subposts WHERE post = ? ORDER BY id ASC");
@@ -38,7 +38,7 @@
 				if ($subs->rowCount() != 0) {
 				 	$hassubs = true; ?>
 					<span><?php echo $subs->rowCount()+1; ?> <a href="?read=<?php echo $post['slug']; ?>&chapters">capítulos</a></span>
-				<?php } 
+				<?php }
 				if (isset($_GET['and'])) {
 				 	$sub = $conn->query("SELECT * FROM subposts WHERE id = '$_GET[and]'");
 					$read = $sub->fetch()['body'];
@@ -46,7 +46,7 @@
 				 	$read = $post['body'];
 				 } ?>
 				<span>el <?php echo date('d/m/Y', (int)$post['stamp']); ?></span>
-				<?php $getsection = $conn->query("SELECT * FROM sections WHERE id = '$post[section]'"); 
+				<?php $getsection = $conn->query("SELECT * FROM sections WHERE id = '$post[section]'");
 				while ($section = $getsection->fetch()) { ?>
 				 	<span>en <a href="../?section=<?php echo $section['slug']; ?>"><?php echo $section['name']; ?></a></span>
 				<?php } ?>
@@ -88,7 +88,7 @@
 			<div class="post_social" id="stars">
 				<?php //estrellas
 				$stars = $conn->prepare("SELECT * FROM stars WHERE post = ?");
-				$stars->execute([$post['id']]); 
+				$stars->execute([$post['id']]);
 				//posts relacionados
 				$related = $conn->prepare("SELECT *, MATCH(title, body) AGAINST(?) AS score FROM posts WHERE MATCH(title, body) AGAINST(?) AND id != ? ORDER BY score DESC LIMIT 3");
 				$related->execute([$post['title'], $post['title'], $post['id']]); ?>
@@ -98,7 +98,7 @@
 					<?php } else { ?>
 						<a href="?read=<?php echo $post['slug']; ?>&addstar"><i class="im im-star"></i></a>
 					<?php } ?>
-					 A <?php echo $stars->rowCount(); if ($stars->rowCount() == 1) { echo " usuario le ha gustado."; } else { echo " usuarios les ha gustado."; } ?>	
+					 A <?php echo $stars->rowCount(); if ($stars->rowCount() == 1) { echo " usuario le ha gustado."; } else { echo " usuarios les ha gustado."; } ?>
 				</p>
 				<div class="post_recomm">
 				<?php while ($recomm = $related->fetch()) { ?>
@@ -157,8 +157,8 @@
 	}
 ?>
 </section>
-<script src="../inc/js/masonry.pkgd.min.js"></script>
-<script src="../inc/js/infinite-scroll.pkgd.min.js"></script>
+<script src="../assets/js/masonry.pkgd.min.js"></script>
+<script src="../assets/js/infinite-scroll.pkgd.min.js"></script>
 <script type="text/javascript">
 	$('.post_recomm').masonry({
 		// options
